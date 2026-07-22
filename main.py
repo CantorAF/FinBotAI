@@ -1,8 +1,9 @@
-print("================================")
-print("       FinBot AI v0.6")
-print("================================")
+from services.csv_service import guardar_gasto
+from services.report_service import mostrar_historial
 
-gastos = []
+print("================================")
+print("       FinBot AI v2.0")
+print("================================")
 
 continuar = True
 
@@ -10,9 +11,8 @@ while continuar:
 
     print()
     print("1. Registrar gasto")
-    print("2. Ver gastos")
-    print("3. Ver total gastado")
-    print("4. Salir")
+    print("2. Ver historial")
+    print("3. Salir")
 
     opcion = int(input("Seleccione una opción: "))
 
@@ -21,39 +21,16 @@ while continuar:
         descripcion = input("Descripción del gasto: ")
         valor = int(input("Valor del gasto: "))
 
-        gasto = {
-            "descripcion": descripcion,
-            "valor": valor
-        }
+        guardar_gasto(descripcion, valor)
 
-        gastos.append(gasto)
-
-        print("✅ Gasto registrado")
+        print("✅ Gasto guardado")
 
     if opcion == 2:
 
-        print()
-        print("LISTA DE GASTOS")
-
-        for gasto in gastos:
-
-            print(
-                gasto["descripcion"],
-                "- $",
-                gasto["valor"]
-            )
+        mostrar_historial()
 
     if opcion == 3:
 
-        total = 0
-
-        for gasto in gastos:
-            total = total + gasto["valor"]
-
-        print()
-        print("💰 Total gastado: $", total)
-
-    if opcion == 4:
-
         continuar = False
+
         print("Hasta luego")
